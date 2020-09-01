@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PostListComponent should match snapshot 1`] = `
+<div
+  id="root0"
+>
+  <div>
+     title
+
+  </div>
+</div>
+`;

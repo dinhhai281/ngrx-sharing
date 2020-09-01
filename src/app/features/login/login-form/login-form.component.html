@@ -1,0 +1,52 @@
+<section
+  class="relative login-form bg-gray-900 text-gray-500 text-sm px-6 py-8 rounded-md grid grid-cols-8 gap-16 shadow-md"
+  *ngIf="vm$ | async as vm"
+>
+  <form
+    class="flex flex-col justify-center items-center col-span-5"
+    [formGroup]="form"
+    (ngSubmit)="submit$.next()"
+  >
+    <h1 class="text-xl font-semibold text-white mb-2">Welcome back!</h1>
+    <h3 class="text-base">We're so excited to see you again!</h3>
+    <div class="flex flex-col mt-4 w-full">
+      <label class="mb-2 text-xs text-gray-600 font-medium" for="email">EMAIL</label>
+      <input
+        class="p-2 flex-grow rounded text-gray-400 focus:shadow-outline focus:outline-none bg-gray-700 border-2 border-black"
+        placeholder="Enter your email"
+        name="email"
+        formControlName="email"
+        [readOnly]="vm.loading"
+      />
+      <p class="ml-1 mt-1 h-4 text-red-700 text-xs">
+        <span *ngIf="vm.emailError.required">Email is required</span>
+        <span *ngIf="vm.emailError.email">Not a valid email</span>
+      </p>
+
+      <label class="mb-2 text-xs mt-3 text-gray-600 font-medium" for="password">PASSWORD</label>
+      <input
+        class="p-2 flex-grow rounded text-gray-400 focus:shadow-outline focus:outline-none bg-gray-700 border-2 border-black"
+        placeholder="Enter your password"
+        name="password"
+        type="password"
+        formControlName="password"
+        [readOnly]="vm.loading"
+      />
+      <a class="text-indigo-400 mt-1 ml-1 text-xs cursor-pointer">Forgot your password?</a>
+
+      <button
+        class="h-10 mt-6 rounded font-medium focus:outline-none transition duration-100 text-base"
+        type="submit"
+        [ngClass]="vm.buttonColorClass"
+        [disabled]="vm.loading"
+      >
+        Login
+      </button>
+    </div>
+  </form>
+  <div class="flex flex-col col-span-3 justify-center items-center">
+    <div class="h-40 w-40 bg-gray-400 rounded border-4 border-white"></div>
+    <h4 class="text-xl mt-4 text-gray-200">Log in with QR Code</h4>
+    <p class="text-center mt-1 text-base text-gray-600">Scan this with the mobile app to login instantly.</p>
+  </div>
+</section>

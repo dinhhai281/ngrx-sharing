@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavbarComponent should match snapshot 1`] = `
+<div
+  id="root0"
+>
+  
+  
+  <div
+    class="flex py-3 px-8 justify-between items-center bg-gray-800 shadow-sm"
+  >
+    <section
+      class="flex items-center"
+    >
+      <div
+        class="h-8 w-8 bg-white text-blue-500 rounded-full border-2 border-gray-400 flex items-center justify-center text-xs"
+      />
+      <input
+        class="ml-4 h-6 px-2 text-sm rounded bg-gray-900 text-gray-200 focus:outline-none focus:shadow-outline"
+        placeholder="Search or jump to..."
+      />
+    </section>
+    <section
+      class="flex justify-center items-center"
+    >
+      <mat-icon
+        aria-hidden="true"
+        class="cursor-pointer mr-4 mat-icon notranslate mat-icon-no-color"
+        data-mat-icon-name="notification"
+        data-mat-icon-type="svg"
+        matbadge="3"
+        matbadgecolor="primary"
+        matbadgesize="small"
+        role="img"
+        svgicon="notification"
+      >
+        <svg
+          class="fake-testing-svg"
+          fit=""
+          focusable="false"
+          height="100%"
+          preserveAspectRatio="xMidYMid meet"
+          width="100%"
+        />
+      </mat-icon>
+      <button
+        class="mr-4 focus:outline-none flex items-center"
+      >
+        <mat-icon
+          aria-hidden="true"
+          class="mat-icon notranslate mat-icon-no-color"
+          data-mat-icon-name="add"
+          data-mat-icon-type="svg"
+          role="img"
+          svgicon="add"
+        >
+          <svg
+            class="fake-testing-svg"
+            fit=""
+            focusable="false"
+            height="100%"
+            preserveAspectRatio="xMidYMid meet"
+            width="100%"
+          />
+        </mat-icon>
+      </button>
+      <button
+        cdkoverlayorigin=""
+        class="focus:outline-none flex items-center"
+      >
+        <span
+          class="h-8 w-8 rounded-full text-blue-500 bg-white border-2 border-gray-400 flex items-center justify-center text-xs"
+          data-testid="avatar"
+        >
+           TU 
+        </span>
+      </button>
+    </section>
+  </div>
+  
+  
+</div>
+`;
