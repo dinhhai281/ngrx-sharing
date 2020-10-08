@@ -2,11 +2,14 @@
   "name": "kb-clone",
   "version": "0.0.0",
   "scripts": {
-    "start": "ng serve",
+    "start:ui": "ng serve",
+    "start:functions": "cd functions && npm run serve",
     "build": "NODE_ENV=production ng build --prod=true",
+    "build:functions": "cd functions && npm run build",
     "test": "jest --verbose",
     "test:coverage": "jest --coverage",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "info:inet": "ip addr show eth0 | grep -oP '(?<=inet\\s)\\d+(\\.\\d+){3}'"
   },
   "private": true,
   "dependencies": {

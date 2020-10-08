@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CollectionDialogComponent should match snapshot 1`] = `
+<div
+  id="root0"
+>
+  <h1
+    class="text-lg text-pink-700 mat-dialog-title"
+    mat-dialog-title=""
+  >
+     Create New Collection
+
+  </h1>
+  <div
+    class="mat-dialog-content"
+    mat-dialog-content=""
+  >
+    <input
+      class="p-2 flex-grow rounded text-pink-800 focus:outline-none border-2 border-pink-700 ng-untouched ng-pristine ng-valid"
+      placeholder="Collection Name"
+    />
+  </div>
+  <div
+    align="end"
+    class="mat-dialog-actions"
+    mat-dialog-actions=""
+  >
+    <button
+      class="focus:outline-none"
+      color="primary"
+      mat-button=""
+    >
+       Create 
+    </button>
+  </div>
+</div>
+`;

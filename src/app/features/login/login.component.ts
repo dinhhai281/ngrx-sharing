@@ -6,7 +6,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { fromAuth } from '@store/reducers';
+import { fromAuth, State } from '@store/reducers';
 import { Subject } from 'rxjs';
 import { map, takeUntil, tap } from 'rxjs/operators';
 import { LoginFormValue } from './login-form/login-form.component';
@@ -39,5 +39,5 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  constructor(private readonly store: Store) {}
+  constructor(private readonly store: Store<State>) {}
 }

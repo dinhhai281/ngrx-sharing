@@ -7,6 +7,6 @@ import { head, take } from 'ramda';
 })
 export class UserAvatarPipe implements PipeTransform {
   transform(user: User, fallback = '') {
-    return user ? take(2)(user.name.split(' ').map(head).join('')) : fallback;
+    return user ? take(2)(user.email) : fallback;
   }
 }

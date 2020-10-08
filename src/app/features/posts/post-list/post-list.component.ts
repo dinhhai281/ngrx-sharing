@@ -7,7 +7,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { Post } from '@app/models';
+import { Collection, Post } from '@app/models';
 
 @Component({
   selector: 'app-post-list',
@@ -18,9 +18,14 @@ import { Post } from '@app/models';
 })
 export class PostListComponent implements OnInit {
   @Input() posts: Post[];
+  @Input() collections: Collection[];
   @Output('selectPost') select$ = new EventEmitter<number>();
+  @Output('addToCollection') collectionClick$ = new EventEmitter<{
+    postId: number;
+    collectionId: string;
+  }>();
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit() {}
 }

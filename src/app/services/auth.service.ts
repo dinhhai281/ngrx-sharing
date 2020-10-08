@@ -1,26 +1,25 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '@app/models';
-import { of, throwError, timer } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { RepsonseData, User } from '@app/models';
+import { environment } from '@environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  loginWithLocal(username: string, password: string) {
-    return timer(Math.random() * 1000 + 1000).pipe(
-      switchMap(() => {
-        if (username === 'dinhhai281@gmail.com' && password === '123456789') {
-          return of<{ user: User; token: string }>({
-            user: {
-              id: 1,
-              name: 'Hai Dinh Nguyen',
-            },
-            token: 'f4k3t0k311',
-          });
-        }
-        return throwError('Unauthenticated');
-      }),
-    );
+  register(email: string, password: string) {
+    return this.http.post<RepsonseData<User>>(environment.service.register, {
+      email,
+      password,
+    });
   }
+
+  login(email: string, password: string) {
+    return this.http.post<RepsonseData<User>>(`${environment.service.register}/login`, {
+      email,
+      password,
+    });
+  }
+
+  constructor(private readonly http: HttpClient) {}
 }

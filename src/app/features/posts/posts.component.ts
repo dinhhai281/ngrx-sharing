@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { fromAuth, State } from '@app/store/reducers';
+import { fromAuth, fromCollection, State } from '@app/store/reducers';
 import { fromPost } from '@store/reducers';
 import { select, Store } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
@@ -16,18 +16,23 @@ export class PostsComponent implements OnInit {
   posts$ = this.store.pipe(select(fromPost.selectAllPosts));
   selectedPost$ = this.store.pipe(select(fromPost.selectCurrentPost));
   me$ = this.store.pipe(select(fromAuth.selectMe));
+  collections$ = this.store.pipe(select(fromCollection.selectAllCollections));
 
-  vm$ = combineLatest([this.posts$, this.selectedPost$]).pipe(
-    map(([posts, selectedPost]) => ({ posts, selectedPost })),
+  vm$ = combineLatest([this.posts$, this.collections$]).pipe(
+    map(([posts, collections]) => ({ posts, collections })),
   );
 
   ngOnInit() {
     this.store.dispatch(fromPost.fetchPosts());
   }
 
-  onSelectPost = (postId: number) => {
+  onSelectPost(postId: number) {
     this.store.dispatch(fromPost.selectPost({ id: postId }));
-  };
+  }
+
+  onAddToCollection({ postId, collectionId }: { postId: number; collectionId: string }) {
+    this.store.dispatch(fromCollection.updateCollection({ postId, collectionId }));
+  }
 
   constructor(private store: Store<State>) {}
 }

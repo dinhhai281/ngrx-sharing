@@ -1,0 +1,12 @@
+<div class="flex flex-col p-2">
+  <h1 class="text-xl text-pink-700">All Collections</h1>
+  <mat-divider></mat-divider>
+  <mat-chip-list class="mt-4" color="primary">
+    <mat-chip
+      *ngFor="let collection of collections$ | async"
+      [matBadge]="collection.posts.length"
+    >
+      {{ collection.name }}
+    </mat-chip>
+  </mat-chip-list>
+</div>

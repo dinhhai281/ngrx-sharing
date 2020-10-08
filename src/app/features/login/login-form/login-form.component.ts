@@ -16,6 +16,7 @@ import { LoginFormStore } from './login-form.store';
 export interface LoginFormValue {
   email: string;
   password: string;
+  isRegister: boolean;
 }
 
 type NgError = Observable<Partial<NgValidatorsErrors>>;
@@ -36,14 +37,22 @@ export class LoginFormComponent implements OnInit {
 
   form = this.fb.group<LoginFormValue, NgValidatorsErrors>({
     email: this.fb.control('', [Validators.required, Validators.email]),
-    password: this.fb.control(''),
+    password: this.fb.control('', [Validators.required]),
+    isRegister: this.fb.control(false),
   });
 
-  vm$ = combineLatest([this.getControlErrors('email'), this.state.vm$]).pipe(
-    map(([emailError, { loading, buttonColorClass }]) => ({
+  vm$ = combineLatest([
+    this.form.value$.pipe(map(value => value.isRegister)),
+    this.getControlErrors('email'),
+    this.getControlErrors('password'),
+    this.state.vm$,
+  ]).pipe(
+    map(([isRegister, emailError, passwordError, { loading, buttonColorClass }]) => ({
       emailError,
+      passwordError,
       loading,
       buttonColorClass,
+      isRegister,
     })),
   );
 

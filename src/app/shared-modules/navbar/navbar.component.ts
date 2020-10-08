@@ -13,5 +13,9 @@ import { NavbarStore } from './navbar.store';
 export class NavbarComponent implements OnInit {
   ngOnInit() {}
 
+  onLogout() {
+    this.state.logout();
+  }
+
   constructor(public readonly state: NavbarStore) {}
 }
