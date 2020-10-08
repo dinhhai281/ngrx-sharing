@@ -1,13 +1,9 @@
-import {
-  Component,
-  OnInit,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import { Post } from '@app/models';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { fromCollection, fromPost, State } from '@store/reducers';
+import { not } from 'ramda';
+import { combineLatest, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-post-list',
@@ -17,10 +13,22 @@ import { Post } from '@app/models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostListComponent implements OnInit {
-  @Input() posts: Post[];
-  @Output('selectPost') select$ = new EventEmitter<number>();
+  unsubscribe$ = new Subject<void>();
+  posts$ = this.store.pipe(select(fromPost.selectAllPosts));
+  collections$ = this.store.pipe(select(fromCollection.selectAllCollections));
+  disableAdd$ = this.collections$.pipe(map(not));
 
-  constructor() {}
+  vm$ = combineLatest([this.posts$, this.collections$, this.disableAdd$]).pipe(
+    map(([posts, collections, disableAdd]) => ({ posts, collections, disableAdd })),
+  );
 
-  ngOnInit(): void {}
+  constructor(private readonly store: Store<State>) {}
+
+  ngOnInit() {
+    this.store.dispatch(fromPost.fetchPosts());
+  }
+
+  onAddPostToCollection(postId: number, collectionId: string) {
+    this.store.dispatch(fromCollection.addPostToCollection({ postId, collectionId }));
+  }
 }

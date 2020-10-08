@@ -15,3 +15,5 @@ export const selectCurrentPost = createSelector(
   selectCurrentPostId,
   (postEntities, postId) => postEntities[postId],
 );
+export const selectPostById = (id: number) =>
+  createSelector(selectPostEntities, entities => entities[id]);

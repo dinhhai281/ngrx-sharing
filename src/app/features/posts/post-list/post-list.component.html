@@ -1,20 +1,43 @@
-<div class="grid grid-flow-row">
-  <article
-    class="border-red-500 border-2 rounded-md bg-white p-4 mb-2 grid grid-cols-4 gap-2 cursor-pointer"
-    *ngFor="let post of posts"
-    (click)="select$.next(post.id)"
-  >
-    <div class="col-span-1">
-      {{ post.id }}
-      {{ post.userId }}
-    </div>
-    <div class="col-span-3">
-      <div class="text-lg text-pink-700 font-semibold">
+<ng-container *ngIf="vm$ | async as vm">
+  <div class="grid grid-cols-4 gap-4 pt-2">
+    <mat-card *ngFor="let post of vm.posts">
+      <mat-card-title class="truncate text-pink-700">
         {{ post.title }}
-      </div>
-      <div>
+      </mat-card-title>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-content class="h-48 py-2">
         {{ post.body }}
-      </div>
-    </div>
-  </article>
-</div>
+      </mat-card-content>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-actions align="end">
+        <button
+          mat-button
+          class="focus:outline-none"
+          color="primary"
+          [disabled]="vm.disableAdd"
+          [matMenuTriggerFor]="menu"
+          [matMenuTriggerData]="{ postId: post.id }"
+        >
+          Add to collections
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <mat-menu #menu="matMenu" xPosition="before">
+    <ng-template matMenuContent let-postId="postId">
+      <button
+        mat-menu-item
+        *ngFor="let collection of vm.collections"
+        class="focus:outline-none"
+        (click)="onAddPostToCollection(postId, collection.id)"
+      >
+        {{ collection.name }}
+      </button>
+    </ng-template>
+  </mat-menu>
+</ng-container>

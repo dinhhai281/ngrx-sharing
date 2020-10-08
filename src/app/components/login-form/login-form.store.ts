@@ -20,13 +20,4 @@ export class LoginFormStore extends ComponentStore<LoginFormState> {
   readonly setLoading = this.updater<boolean>((_, isLoading) => ({
     loading: isLoading,
   }));
-
-  readonly vm$ = this.select(
-    this.loading$,
-    this.buttonColorClass$,
-    (loading, buttonColorClass) => ({
-      loading,
-      buttonColorClass,
-    }),
-  );
 }

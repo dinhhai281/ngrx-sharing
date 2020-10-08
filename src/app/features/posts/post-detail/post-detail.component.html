@@ -1,3 +1,18 @@
-<div>
-  {{ post.title }}
-</div>
+<mat-card *ngIf="post$ | async as post" class="mt-2 mat-elevation-z2">
+  <mat-card-content class="flex justify-between">
+    {{ post.title }}
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-actions align="end">
+    <button
+      mat-button
+      color="primary"
+      class="focus:outline-none"
+      (click)="removePost$.next(post.id)"
+    >
+      Remove
+    </button>
+  </mat-card-actions>
+</mat-card>

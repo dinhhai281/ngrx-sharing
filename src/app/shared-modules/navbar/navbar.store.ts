@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { CollectionDialogComponent } from '@components/collection-dialog';
 import { User } from '@app/models';
 import { ComponentStore } from '@ngrx/component-store';
 import { select, Store } from '@ngrx/store';
-import { fromAuth, State } from '@store/reducers';
+import { fromAuth, fromCollection, State } from '@store/reducers';
+import { map, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 export interface NavbarState {
   me: User;
@@ -11,7 +14,7 @@ export interface NavbarState {
 
 @Injectable()
 export class NavbarStore extends ComponentStore<NavbarState> {
-  constructor(private store: Store<State>) {
+  constructor(private store: Store<State>, private matDialog: MatDialog) {
     super({ me: null, isOpenUserMenu: false });
   }
 
@@ -26,8 +29,28 @@ export class NavbarStore extends ComponentStore<NavbarState> {
     ...state,
     me,
   }));
-  readonly toggleUserMenu = this.updater<boolean>(state => ({
+  readonly toggleUserMenu = this.updater<void>(state => ({
     ...state,
     isOpenUserMenu: !state.isOpenUserMenu,
   }));
+
+  readonly logout = this.effect(logoutEvent$ =>
+    logoutEvent$.pipe(map(fromAuth.logout), tap(this.store.dispatch.bind(this.store))),
+  );
+
+  readonly addCollection = this.effect(addCollectionEvent$ =>
+    addCollectionEvent$.pipe(
+      withLatestFrom(this.me$),
+      switchMap(([, me]) => {
+        const dialog = this.matDialog.open(CollectionDialogComponent);
+        return dialog.componentInstance.value$.pipe(
+          tap(() => dialog.close()),
+          map(collectionName =>
+            fromCollection.createCollection({ collectionName, userId: me.token }),
+          ),
+        );
+      }),
+      tap(this.store.dispatch.bind(this.store)),
+    ),
+  );
 }

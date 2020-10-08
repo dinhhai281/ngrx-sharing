@@ -1,0 +1,20 @@
+<h1 mat-dialog-title class="text-lg text-pink-700">
+  Create New Collection
+</h1>
+<form mat-dialog-content (ngSubmit)="submit$.next()" [formGroup]="form">
+  <input
+    class="p-2 flex-grow rounded text-pink-800 focus:outline-none border-2 border-pink-700"
+    placeholder="Collection Name"
+    formControlName="collectionName"
+  />
+</form>
+<div mat-dialog-actions align="end">
+  <button
+    mat-button
+    color="primary"
+    class="focus:outline-none"
+    (click)="submit$.next()"
+    >
+      Create
+    </button>
+</div>

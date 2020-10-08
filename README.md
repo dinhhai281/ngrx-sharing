@@ -1,15 +1,39 @@
 <p align="center">
 </p>
 <h1 align="center">
-  Something not good for my keyboard
+  NgRx Demo
 </h1>
 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.8.
 
-## Development server
+## Install Google Firebase tools
+```bash
+npm i -g firebase-tools
+```
 
-Run `npm run start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Install dependencies
+UI: run at root folder
+```bash
+npm i
+```
+
+Serverless: run inside `functions` folder
+```bash
+npm run i
+```
+
+## Development server
+Run these command in project root folder
+Firebase emulator
+```
+npm run start:functions
+```
+
+UI:
+```
+npm run start:ui
+```
 
 ## Code scaffolding
 
@@ -17,7 +41,13 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 ## Build
 
-Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```
+npm run build
+```
+
+```
+npm run build:functions
+```
 
 ## Running unit tests
 

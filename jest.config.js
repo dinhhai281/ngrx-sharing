@@ -5,7 +5,8 @@ module.exports = {
   moduleNameMapper: {
     '@store/(.*)': '<rootDir>/src/app/store/$1',
     '@app/(.*)': '<rootDir>/src/app/$1',
-
+    '@environments/(.*)': '<rootDir>/src/environments/$1',
+    '@components/(.*)': '<rootDir>/src/app/components/$1'
   },
   transformIgnorePatterns: [ "/node_modules/(?!ngx-binding).+\\.js$"],
   globals: {

@@ -6,10 +6,10 @@ exports[`LoginFormComponent should match snapshot 1`] = `
 >
   
   <section
-    class="relative login-form bg-gray-900 text-gray-500 text-sm px-6 py-8 rounded-md grid grid-cols-8 gap-16 shadow-md"
+    class="relative login-form bg-gray-900 text-gray-500 text-sm px-6 py-8 rounded-md grid shadow-md"
   >
     <form
-      class="flex flex-col justify-center items-center col-span-5 ng-untouched ng-pristine ng-valid"
+      class="flex flex-col justify-center items-center ng-untouched ng-pristine ng-valid"
       novalidate=""
     >
       <h1
@@ -56,11 +56,33 @@ exports[`LoginFormComponent should match snapshot 1`] = `
           placeholder="Enter your password"
           type="password"
         />
+        <p
+          class="ml-1 mt-1 h-4 text-red-700 text-xs"
+        >
+          
+        </p>
         <a
           class="text-indigo-400 mt-1 ml-1 text-xs cursor-pointer"
         >
           Forgot your password?
         </a>
+        <div
+          class="flex items-center content-center mt-1 ml-1"
+        >
+          <input
+            class="mr-2 ng-untouched ng-pristine ng-valid"
+            formcontrolname="isRegister"
+            id="isRegister"
+            name="isRegister"
+            type="checkbox"
+          />
+          <label
+            class="text-indigo-400 text-xs cursor-pointer"
+            for="isRegister"
+          >
+            Create account with this information
+          </label>
+        </div>
         <button
           class="h-10 mt-6 rounded font-medium focus:outline-none transition duration-100 text-base bg-indigo-400 hover:bg-indigo-500 text-gray-200"
           type="submit"
@@ -69,23 +91,6 @@ exports[`LoginFormComponent should match snapshot 1`] = `
         </button>
       </div>
     </form>
-    <div
-      class="flex flex-col col-span-3 justify-center items-center"
-    >
-      <div
-        class="h-40 w-40 bg-gray-400 rounded border-4 border-white"
-      />
-      <h4
-        class="text-xl mt-4 text-gray-200"
-      >
-        Log in with QR Code
-      </h4>
-      <p
-        class="text-center mt-1 text-base text-gray-600"
-      >
-        Scan this with the mobile app to login instantly.
-      </p>
-    </div>
   </section>
 </div>
 `;

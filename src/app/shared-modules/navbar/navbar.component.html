@@ -1,37 +1,26 @@
 <ng-container *ngIf="state.vm$ | async as vm">
-  <div class="flex py-3 px-8 justify-between items-center bg-gray-800 shadow-sm">
+  <div class="flex py-3 px-8 justify-between items-center bg-gray-800 shadow-sm fixed w-full top-0 z-10">
     <section class="flex items-center">
-      <div
-        class="h-8 w-8 bg-white text-blue-500 rounded-full border-2 border-gray-400 flex items-center justify-center text-xs"
+      <span
+        class="text-pink-600 flex items-center justify-center text-xl font-semibold"
       >
         <ng-content select="[app-label]"></ng-content>
-      </div>
-      <input
-        placeholder="Search or jump to..."
-        class="ml-4 h-6 px-2 text-sm rounded bg-gray-900 text-gray-200 focus:outline-none focus:shadow-outline"
-      />
+      </span>
     </section>
     <section class="flex justify-center items-center">
-      <mat-icon
-        class="cursor-pointer mr-4"
-        matBadge="3"
-        matBadgeColor="primary"
-        matBadgeSize="small"
-        svgIcon="notification"
-      ></mat-icon>
-      <button class="mr-4 focus:outline-none flex items-center">
+      <button class="mr-4 focus:outline-none flex items-center" (click)="onAddCollection()">
         <mat-icon svgIcon="add"></mat-icon>
       </button>
       <button class="focus:outline-none flex items-center"
-        (click)="state.toggleUserMenu()"
+        (click)="onToggleUserMenu()"
         cdkOverlayOrigin
         #userMenu="cdkOverlayOrigin"
       >
         <span
-          class="h-8 w-8 rounded-full text-blue-500 bg-white border-2 border-gray-400 flex items-center justify-center text-xs"
+          class="h-8 w-8 rounded-full text-pink-700 bg-white border-2 border-gray-400 flex items-center justify-center text-xs"
           data-testid="avatar"
         >
-          {{ vm.me | userAvatar:'NA' }}
+          {{ vm.me | userAvatar:'NA' | uppercase }}
         </span>
       </button>
     </section>
@@ -41,21 +30,16 @@
     [cdkConnectedOverlayOrigin]="userMenu"
     [cdkConnectedOverlayOpen]="vm.isOpenUserMenu"
     [cdkConnectedOverlayOffsetY]="8"
-    (overlayOutsideClick)="$event.stopImmediatePropagation(); state.toggleUserMenu();"
+    (overlayOutsideClick)="onOverlayOutsideClick($event)"
   >
     <section class="flex flex-col rounded-lg bg-gray-800 w-48 border border-gray-900">
       <div class="p-3 text-gray-200 flex flex-col border-b border-gray-900">
         <span>Signed in as</span>
-        <span class="font-semibold text-gray-100">{{ 'NA' }}</span>
+        <span class="font-semibold text-gray-100">{{ vm.me.email }}</span>
       </div>
 
       <ul class="py-3 text-gray-200 flex flex-col">
-        <li class="px-3 py-1 cursor-pointer hover:bg-blue-400">Your profile</li>
-        <li class="px-3 py-1 cursor-pointer hover:bg-blue-400">Your repositories</li>
-        <li class="px-3 py-1 cursor-pointer hover:bg-blue-400">Your organizations</li>
-        <li class="px-3 py-1 cursor-pointer hover:bg-blue-400">Your projects</li>
-        <li class="px-3 py-1 cursor-pointer hover:bg-blue-400">Your starts</li>
-        <li class="px-3 py-1 cursor-pointer hover:bg-blue-400">Your gists</li>
+        <li class="px-3 py-1 cursor-pointer hover:bg-blue-400" (click)="onLogout()">Logout</li>
       </ul>
     </section>
   </ng-template>

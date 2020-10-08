@@ -10,12 +10,13 @@ export interface PostEntityState extends EntityState<Post> {
   selectedPostId: number | null;
 }
 
-export const initialState: PostEntityState = adapter.getInitialState({
-  selectedPostId: null,
-});
+export const createInitialState = (): PostEntityState =>
+  adapter.getInitialState({
+    selectedPostId: null,
+  });
 
 const _postReducer = createReducer(
-  initialState,
+  createInitialState(),
   on(selectPost, (state, { id }) => ({ ...state, selectedPostId: id })),
   on(loadPosts, (state, { posts }) => adapter.addMany(posts, { ...state, selectedPostId: null })),
 );

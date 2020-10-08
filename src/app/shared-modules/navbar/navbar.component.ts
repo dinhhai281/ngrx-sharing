@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { NavbarStore } from './navbar.store';
 
@@ -10,8 +10,23 @@ import { NavbarStore } from './navbar.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [NavbarStore],
 })
-export class NavbarComponent implements OnInit {
-  ngOnInit() {}
-
+export class NavbarComponent {
   constructor(public readonly state: NavbarStore) {}
+
+  onLogout() {
+    this.state.logout();
+  }
+
+  onAddCollection() {
+    this.state.addCollection();
+  }
+
+  onToggleUserMenu() {
+    this.state.toggleUserMenu();
+  }
+
+  onOverlayOutsideClick(event: Event) {
+    event.stopImmediatePropagation();
+    this.state.toggleUserMenu();
+  }
 }

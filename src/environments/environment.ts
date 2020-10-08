@@ -17,6 +17,10 @@ export const environment = {
       },
     }),
   ],
+  service: {
+    register: 'http://localhost:5001/my-project-1502260619385/us-central1/register',
+    collection: 'http://localhost:5001/my-project-1502260619385/us-central1/collections',
+  },
 };
 
 /*
